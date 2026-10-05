@@ -1,0 +1,146 @@
+{
+  "held_out_accuracy": 0.6228,
+  "cv_mean_accuracy": 0.6379,
+  "cv_std": 0.0069,
+  "n_diseases": 73,
+  "n_symptoms": 140,
+  "n_training_rows": 18980,
+  "n_estimators": 180,
+  "top_features": [
+    {
+      "symptom": "high_fever",
+      "importance": 0.0404
+    },
+    {
+      "symptom": "cough",
+      "importance": 0.0301
+    },
+    {
+      "symptom": "fatigue",
+      "importance": 0.029
+    },
+    {
+      "symptom": "skin_rash",
+      "importance": 0.0278
+    },
+    {
+      "symptom": "nausea",
+      "importance": 0.0251
+    },
+    {
+      "symptom": "headache",
+      "importance": 0.0227
+    },
+    {
+      "symptom": "shortness_of_breath",
+      "importance": 0.0209
+    },
+    {
+      "symptom": "body_ache",
+      "importance": 0.0198
+    },
+    {
+      "symptom": "runny_nose",
+      "importance": 0.0197
+    },
+    {
+      "symptom": "mild_fever",
+      "importance": 0.0177
+    },
+    {
+      "symptom": "loss_of_appetite",
+      "importance": 0.0166
+    },
+    {
+      "symptom": "abdominal_pain",
+      "importance": 0.0165
+    },
+    {
+      "symptom": "sore_throat",
+      "importance": 0.0164
+    },
+    {
+      "symptom": "persistent_cough",
+      "importance": 0.016
+    },
+    {
+      "symptom": "chills",
+      "importance": 0.0159
+    }
+  ],
+  "per_class_f1": {
+    "Allergic Rhinitis": 0.75,
+    "Anemia": 0.5085,
+    "Angina / Heart Disease": 0.6593,
+    "Appendicitis": 0.8571,
+    "Asthma": 0.6071,
+    "Bell's Palsy": 0.5664,
+    "Benign Prostatic Hyperplasia": 0.7184,
+    "Bronchitis": 0.5366,
+    "COPD": 0.6087,
+    "COVID-19": 0.6729,
+    "Cardiac Arrhythmia": 0.5941,
+    "Cataract": 0.4853,
+    "Chickenpox": 0.6957,
+    "Chikungunya": 0.7407,
+    "Cholera": 0.7,
+    "Chronic Kidney Disease": 0.56,
+    "Common Cold": 0.8036,
+    "Conjunctivitis": 0.735,
+    "Deep Vein Thrombosis": 0.6535,
+    "Dengue Fever": 0.6733,
+    "Ear Infection (Otitis Media)": 0.5301,
+    "Eczema": 0.6019,
+    "Endometriosis": 0.6465,
+    "Epilepsy": 0.5841,
+    "Food Poisoning": 0.6727,
+    "Frozen Shoulder": 0.625,
+    "Fungal Skin Infection": 0.6408,
+    "GERD (Acid Reflux)": 0.7037,
+    "Gallstones": 0.4545,
+    "Gastritis": 0.4646,
+    "Gastroenteritis": 0.8214,
+    "Glaucoma": 0.5287,
+    "Gout": 0.62,
+    "Heat Stroke": 0.5243,
+    "Hemorrhoids": 0.3714,
+    "Hepatitis A": 0.7018,
+    "Hernia": 0.4045,
+    "Hypertension": 0.209,
+    "Hyperthyroidism": 0.5135,
+    "Hypothyroidism": 0.7059,
+    "Influenza (Flu)": 0.6981,
+    "Irritable Bowel Syndrome (IBS)": 0.6813,
+    "Kidney Stones": 0.7033,
+    "Laryngitis": 0.7593,
+    "Liver Cirrhosis": 0.6,
+    "Malaria": 0.708,
+    "Measles": 0.7826,
+    "Migraine": 0.6838,
+    "Motion Sickness": 0.4954,
+    "Mumps": 0.5941,
+    "Osteoarthritis": 0.6602,
+    "Osteoporosis": 0.1951,
+    "PCOS": 0.4524,
+    "Peptic Ulcer Disease": 0.5545,
+    "Pneumonia": 0.7227,
+    "Psoriasis": 0.6667,
+    "Rheumatoid Arthritis": 0.6526,
+    "Rubella": 0.5481,
+    "Scabies": 0.6136,
+    "Sciatica / Lower Back Pain": 0.6154,
+    "Sinusitis": 0.7,
+    "Stye": 0.6897,
+    "Tetanus": 0.6239,
+    "Tonsillitis / Pharyngitis": 0.6729,
+    "Tuberculosis": 0.8174,
+    "Type 2 Diabetes": 0.6471,
+    "Typhoid Fever": 0.5385,
+    "Urinary Tract Infection": 0.6992,
+    "Vertigo (BPPV)": 0.7167,
+    "Vitamin B12 Deficiency": 0.425,
+    "Vitamin D Deficiency": 0.4384,
+    "Vitiligo": 0.4459,
+    "Whooping Cough": 0.6947
+  }
+}

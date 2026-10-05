@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}Emergency: Nearest Hospital — MediSense AI{% endblock %}
+
+{% block content %}
+<div class="emergency-banner" style="margin-bottom:16px;">
+  🚑 <strong>In a medical emergency, call for help immediately.</strong>
+  <div class="emergency-detail">
+    {% for n in emergency_numbers %}
+      <div>{{ n.label }}: <a href="tel:{{ n.number }}" style="color:var(--color-danger); font-weight:700; text-decoration:underline;">{{ n.number }} 📞</a></div>
+    {% endfor %}
+  </div>
+</div>
+
+<h1>🏥 Find the Nearest Hospital</h1>
+<p class="subtitle">Uses your device's live location to find and map nearby hospitals.</p>
+
+<div class="card">
+  <button id="locate-btn" class="btn-primary">📍 Use my current location</button>
+  <span id="locate-status" class="muted small" style="margin-left:10px;"></span>
+  <p class="muted small" style="margin-top:10px;">
+    Your browser will ask for permission to share your location. It is only used to find nearby hospitals — it is not stored or sent anywhere else.
+    {% if not live_enabled %}Results come from OpenStreetMap's free hospital directory.{% else %}Results come from Google Places, with an automatic free fallback if that's unavailable.{% endif %}
+  </p>
+</div>
+
+<div class="card" id="map-card" style="display:none;">
+  <div id="map" style="height:380px; border-radius:10px;"></div>
+</div>
+
+<div class="card" id="results-card" style="display:none;">
+  <h2>Nearby hospitals</h2>
+  <table class="history-table">
+    <thead><tr><th>Name</th><th>Address</th><th>Distance</th><th></th></tr></thead>
+    <tbody id="results-body"></tbody>
+  </table>
+</div>
+
+<div class="disclaimer-box" id="fallback-box" style="display:none;">
+  We couldn't access your location or find nearby results. You can browse the
+  <a href="{{ url_for('find_doctor') }}">curated Agra &amp; Mathura specialist directory</a> instead, or
+  <a id="google-fallback-link" href="https://www.google.com/maps/search/hospitals+near+me" target="_blank" rel="noopener">search "hospitals near me" on Google Maps →</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const locateBtn = document.getElementById('locate-btn');
+const locateStatus = document.getElementById('locate-status');
+const mapCard = document.getElementById('map-card');
+const resultsCard = document.getElementById('results-card');
+const resultsBody = document.getElementById('results-body');
+const fallbackBox = document.getElementById('fallback-box');
+
+let map, userMarker;
+
+function initMap(lat, lng) {
+  map = L.map('map').setView([lat, lng], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 19,
+  }).addTo(map);
+  userMarker = L.marker([lat, lng], { title: 'You are here' }).addTo(map)
+    .bindPopup('📍 Your location').openPopup();
+}
+
+function renderResults(hospitals) {
+  resultsBody.innerHTML = '';
+  hospitals.forEach(h => {
+    const marker = L.marker([h.lat, h.lng]).addTo(map)
+      .bindPopup(`<strong>${h.name}</strong><br>${h.address || ''}<br>${h.distance_km} km away`);
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${h.name}</td>
+      <td class="small muted">${h.address || '—'}</td>
+      <td>${h.distance_km} km</td>
+      <td><a href="${h.directions_url}" target="_blank" rel="noopener">Directions →</a></td>
+    `;
+    resultsBody.appendChild(row);
+  });
+  resultsCard.style.display = hospitals.length ? 'block' : 'none';
+  if (!hospitals.length) {
+    fallbackBox.style.display = 'block';
+  }
+}
+
+function handleSuccess(position) {
+  const lat = position.coords.latitude;
+  const lng = position.coords.longitude;
+  locateStatus.textContent = 'Location found — searching nearby hospitals…';
+
+  const fallbackLink = document.getElementById('google-fallback-link');
+  if (fallbackLink) {
+    fallbackLink.href = `https://www.google.com/maps/search/hospitals/@${lat},${lng},14z`;
+  }
+
+  mapCard.style.display = 'block';
+  initMap(lat, lng);
+
+  fetch(`/api/nearby-hospitals?lat=${lat}&lng=${lng}`)
+    .then(r => r.json())
+    .then(data => {
+      console.log('nearby-hospitals response:', data);
+      locateStatus.textContent = `Found ${data.count} nearby hospital(s) (source: ${data.source}).`;
+      renderResults(data.hospitals || []);
+    })
+    .catch((err) => {
+      console.error('nearby-hospitals fetch failed:', err);
+      locateStatus.textContent = 'Could not fetch nearby hospitals — check the browser console (F12) for details.';
+      fallbackBox.style.display = 'block';
+    });
+}
+
+function handleError(error) {
+  locateStatus.textContent = 'Location access was denied or unavailable.';
+  fallbackBox.style.display = 'block';
+}
+
+locateBtn.addEventListener('click', function () {
+  if (!navigator.geolocation) {
+    locateStatus.textContent = 'Your browser does not support geolocation.';
+    fallbackBox.style.display = 'block';
+    return;
+  }
+  locateStatus.textContent = 'Requesting your location…';
+  navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
+    enableHighAccuracy: true,
+    timeout: 10000,
+  });
+});
+</script>
+{% endblock %}

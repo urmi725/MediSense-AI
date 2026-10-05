@@ -1,0 +1,74 @@
+disease,specialist
+Common Cold,General Physician
+Influenza (Flu),General Physician
+COVID-19,General Physician / Infectious Disease Specialist
+Tuberculosis,Pulmonologist / Infectious Disease Specialist
+Typhoid Fever,General Physician / Infectious Disease Specialist
+Hepatitis A,Gastroenterologist / Hepatologist
+Chikungunya,Infectious Disease Specialist
+Cholera,Infectious Disease Specialist / General Physician
+Dengue Fever,Infectious Disease Specialist
+Malaria,Infectious Disease Specialist
+Chickenpox,Dermatologist / General Physician
+Measles,General Physician / Infectious Disease Specialist
+Mumps,General Physician / Infectious Disease Specialist
+Rubella,General Physician / Infectious Disease Specialist
+Whooping Cough,Pulmonologist / Pediatrician
+Tetanus,Emergency Medicine / General Physician
+Food Poisoning,General Physician / Gastroenterologist
+Asthma,Pulmonologist
+Pneumonia,Pulmonologist
+Bronchitis,Pulmonologist / General Physician
+COPD,Pulmonologist
+Allergic Rhinitis,Allergist / ENT Specialist
+Sinusitis,ENT Specialist
+Tonsillitis / Pharyngitis,ENT Specialist
+Laryngitis,ENT Specialist
+Gastroenteritis,Gastroenterologist
+Gastritis,Gastroenterologist
+GERD (Acid Reflux),Gastroenterologist
+Peptic Ulcer Disease,Gastroenterologist
+Irritable Bowel Syndrome (IBS),Gastroenterologist
+Appendicitis,General Surgeon
+Hemorrhoids,General Surgeon / Gastroenterologist
+Hernia,General Surgeon
+Gallstones,General Surgeon / Gastroenterologist
+Liver Cirrhosis,Hepatologist / Gastroenterologist
+Urinary Tract Infection,Urologist / General Physician
+Kidney Stones,Urologist / Nephrologist
+Chronic Kidney Disease,Nephrologist
+Benign Prostatic Hyperplasia,Urologist
+Hypertension,Cardiologist
+Angina / Heart Disease,Cardiologist
+Cardiac Arrhythmia,Cardiologist
+Deep Vein Thrombosis,Vascular Specialist / General Physician
+Type 2 Diabetes,Endocrinologist
+Anemia,Hematologist / General Physician
+Gout,Rheumatologist
+Vitamin D Deficiency,General Physician / Endocrinologist
+Vitamin B12 Deficiency,General Physician / Hematologist
+Hypothyroidism,Endocrinologist
+Hyperthyroidism,Endocrinologist
+Conjunctivitis,Ophthalmologist
+Ear Infection (Otitis Media),ENT Specialist
+Stye,Ophthalmologist
+Cataract,Ophthalmologist
+Glaucoma,Ophthalmologist
+Migraine,Neurologist
+Vertigo (BPPV),Neurologist / ENT Specialist
+Bell's Palsy,Neurologist
+Epilepsy,Neurologist
+Motion Sickness,General Physician
+Heat Stroke,Emergency Medicine / General Physician
+Osteoarthritis,Orthopedist
+Rheumatoid Arthritis,Rheumatologist
+Sciatica / Lower Back Pain,Orthopedist / Neurologist
+Osteoporosis,Orthopedist / Endocrinologist
+Frozen Shoulder,Orthopedist
+PCOS,Gynecologist
+Endometriosis,Gynecologist
+Fungal Skin Infection,Dermatologist
+Psoriasis,Dermatologist
+Eczema,Dermatologist
+Vitiligo,Dermatologist
+Scabies,Dermatologist

@@ -1,0 +1,74 @@
+disease,precautions
+Common Cold,Rest and stay hydrated | Use steam inhalation for congestion | Avoid cold drinks
+Influenza (Flu),Rest and isolate from others | Stay hydrated | Monitor fever regularly
+COVID-19,Isolate from others | Monitor oxygen levels if possible | Seek care if breathing worsens
+Tuberculosis,Complete the full course of prescribed medication | Cover mouth while coughing | Ensure good ventilation at home
+Typhoid Fever,Drink only boiled/purified water | Eat easily digestible food | Complete prescribed antibiotic course
+Hepatitis A,"Rest and avoid alcohol | Maintain strict hand hygiene | Eat a low-fat, balanced diet"
+Chikungunya,Rest and stay hydrated | Use mosquito protection to avoid spreading it | Avoid NSAIDs until dengue is ruled out
+Cholera,Rehydrate urgently with ORS | Maintain strict food and water hygiene | Seek medical care promptly
+Dengue Fever,Rest and stay hydrated | Avoid NSAIDs like ibuprofen/aspirin | Monitor for warning signs closely
+Malaria,Seek prompt antimalarial treatment | Stay hydrated | Use mosquito protection to prevent spread
+Chickenpox,Avoid scratching rashes | Isolate to prevent spread | Keep skin clean and cool
+Measles,Isolate to prevent spread | Rest and stay hydrated | Avoid bright light if eyes are sensitive
+Mumps,Isolate to prevent spread | Apply warm/cold packs to swollen glands | Eat soft foods that need less chewing
+Rubella,Isolate to prevent spread (especially from pregnant women) | Rest and stay hydrated | Monitor joint pain
+Whooping Cough,Isolate to prevent spread | Keep the air moist with a humidifier | Watch closely for breathing difficulty in infants
+Tetanus,Keep wounds clean and properly dressed | Seek immediate medical attention | Ensure vaccination status is up to date
+Food Poisoning,Stay hydrated with ORS | Rest and eat bland food once tolerated | Discard the suspected contaminated food
+Asthma,"Avoid known triggers (dust, smoke) | Keep rescue inhaler accessible | Monitor breathing closely"
+Pneumonia,Rest and stay hydrated | Monitor breathing and fever | Seek medical care promptly
+Bronchitis,Rest and stay hydrated | Use a humidifier | Avoid smoke and irritants
+COPD,Avoid smoking and smoke exposure completely | Use prescribed inhalers consistently | Get vaccinated against flu/pneumonia as advised
+Allergic Rhinitis,Avoid known allergens | Keep windows closed during high pollen days | Consider antihistamines
+Sinusitis,Use steam inhalation | Stay hydrated | Avoid allergens and irritants
+Tonsillitis / Pharyngitis,Gargle with warm salt water | Rest your voice | Stay hydrated
+Laryngitis,Rest your voice as much as possible | Stay hydrated | Avoid whispering (strains voice more than speaking softly)
+Gastroenteritis,Stay hydrated with oral rehydration solution | Eat bland foods | Avoid dairy temporarily
+Gastritis,"Avoid spicy and acidic foods | Eat smaller, frequent meals | Avoid NSAIDs and alcohol"
+GERD (Acid Reflux),Avoid large meals before bedtime | Elevate head while sleeping | Avoid spicy/fatty foods
+Peptic Ulcer Disease,Avoid NSAIDs and alcohol | Eat smaller frequent meals | Manage stress levels
+Irritable Bowel Syndrome (IBS),Identify and avoid trigger foods | Manage stress | Increase fiber gradually
+Appendicitis,Avoid food/water until evaluated | Seek urgent medical/surgical evaluation | Do not take laxatives or painkillers before diagnosis
+Hemorrhoids,Increase fiber and water intake | Avoid straining during bowel movements | Use warm sitz baths for relief
+Hernia,Avoid heavy lifting and straining | Maintain a healthy weight | Seek surgical evaluation
+Gallstones,Avoid fatty and fried foods | Maintain a healthy weight gradually | Seek care for severe or persistent pain
+Liver Cirrhosis,Avoid alcohol completely | Follow a low-sodium diet | Regular monitoring with a hepatologist
+Urinary Tract Infection,Drink plenty of water | Avoid holding urine | Avoid caffeine and alcohol
+Kidney Stones,Increase water intake | Reduce salt and oxalate-rich foods | Seek care for severe pain
+Chronic Kidney Disease,Follow a kidney-friendly diet as advised | Monitor blood pressure and sugar | Avoid NSAIDs and unnecessary medications
+Benign Prostatic Hyperplasia,Limit fluids before bedtime | Avoid decongestants that worsen symptoms | Regular urology check-ups
+Hypertension,Reduce salt intake | Monitor blood pressure regularly | Manage stress
+Angina / Heart Disease,Avoid strenuous exertion | Monitor chest pain closely | Seek urgent care for worsening symptoms
+Cardiac Arrhythmia,Avoid excess caffeine and stimulants | Monitor pulse regularly | Seek care for fainting or severe symptoms
+Deep Vein Thrombosis,Avoid prolonged immobility | Keep the leg elevated if advised | Seek urgent medical evaluation
+Type 2 Diabetes,Monitor blood sugar regularly | Follow a balanced diet | Stay physically active
+Anemia,Eat iron-rich foods | Consult about iron supplementation | Avoid overexertion
+Gout,"Limit red meat, alcohol, and sugary drinks | Stay well hydrated | Rest and elevate the affected joint"
+Vitamin D Deficiency,Get safe sun exposure regularly | Eat vitamin D-rich foods | Consider supplementation if advised
+Vitamin B12 Deficiency,"Eat B12-rich foods (dairy, eggs, meat) | Consider supplementation if advised | Regular blood tests to monitor levels"
+Hypothyroidism,Take medication consistently as prescribed | Monitor weight and energy levels | Regular thyroid check-ups
+Hyperthyroidism,Avoid excess iodine intake | Manage stress | Regular thyroid check-ups
+Conjunctivitis,Avoid touching/rubbing eyes | Wash hands frequently | Avoid sharing towels/pillows
+Ear Infection (Otitis Media),Avoid inserting objects in the ear | Keep the ear dry | Consult a doctor for antibiotics if needed
+Stye,Apply a warm compress several times a day | Avoid squeezing or popping it | Avoid wearing contact lenses/makeup until healed
+Cataract,Use brighter lighting for reading | Wear sunglasses outdoors | Regular eye check-ups
+Glaucoma,Use prescribed eye drops consistently | Regular eye pressure check-ups | Avoid activities that increase eye pressure if advised
+Migraine,"Rest in a dark, quiet room | Stay hydrated | Avoid known triggers (screens, stress)"
+Vertigo (BPPV),Avoid sudden head movements | Sit or lie down when dizzy | Consult a doctor for positioning exercises
+Bell's Palsy,Protect the affected eye (use lubricating drops) | Gently massage/exercise facial muscles as advised | Seek prompt medical evaluation to rule out stroke
+Epilepsy,Take prescribed medication consistently | Avoid known seizure triggers | Inform those around you how to help during a seizure
+Motion Sickness,Look at a fixed point on the horizon | Avoid reading while in motion | Get fresh air if possible
+Heat Stroke,Move to a cool place immediately | Apply cool water/ice packs to the body | Seek urgent medical care — this can be life-threatening
+Osteoarthritis,Maintain a healthy weight | Low-impact exercise | Use joint support if needed
+Rheumatoid Arthritis,Follow prescribed anti-inflammatory treatment | Gentle regular movement | Avoid joint overuse during flares
+Sciatica / Lower Back Pain,Avoid heavy lifting | Maintain good posture | Gentle stretching and physiotherapy
+Osteoporosis,Ensure adequate calcium and vitamin D intake | Do weight-bearing exercise as advised | Take precautions to prevent falls
+Frozen Shoulder,Do gentle range-of-motion exercises | Apply heat before stretching | Be patient — recovery can take months
+PCOS,Maintain a balanced diet and regular exercise | Monitor menstrual cycle patterns | Regular gynecological check-ups
+Endometriosis,Track menstrual symptoms and pain patterns | Use heat therapy for pain relief | Regular gynecological follow-up
+Fungal Skin Infection,Keep affected area clean and dry | Avoid sharing personal items | Wear breathable clothing
+Psoriasis,"Moisturize skin regularly | Avoid known triggers (stress, skin injury) | Get sensible sun exposure if advised"
+Eczema,Moisturize skin frequently | Avoid harsh soaps and long hot showers | Identify and avoid personal triggers
+Vitiligo,Use sunscreen on affected areas | Consider camouflage makeup if desired | Regular dermatology follow-up
+Scabies,Wash all bedding and clothing in hot water | Avoid close contact until treated | Treat all household members simultaneously if advised

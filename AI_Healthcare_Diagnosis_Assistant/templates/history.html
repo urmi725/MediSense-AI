@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}History — MediSense AI{% endblock %}
+
+{% block content %}
+<div class="report-header">
+  <h1>History</h1>
+  <div>
+    {% if records %}
+    <a href="{{ url_for('history_export') }}" class="btn-secondary">⬇️ Export CSV</a>
+    <form action="{{ url_for('history_clear') }}" method="POST" style="display:inline;" onsubmit="return confirm('Clear this history? This cannot be undone.');">
+      <button type="submit" class="btn-secondary">Clear history</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% if not user %}
+<div class="disclaimer-box">
+  You're browsing as a guest — this shows all recent checks made on this device.
+  <a href="{{ url_for('register') }}">Create an account</a> to keep a private, personal history.
+</div>
+{% endif %}
+
+{% if records %}
+<div class="card table-card">
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Age</th>
+        <th>Top condition</th>
+        <th>Confidence</th>
+        <th>Risk</th>
+        <th>Emergency</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in records %}
+      <tr>
+        <td>{{ r.created_at }}</td>
+        <td>{{ r.age or '—' }}</td>
+        <td>{{ r.top_disease or '—' }}</td>
+        <td>{{ r.confidence and (r.confidence ~ '%') or '—' }}</td>
+        <td><span class="risk-badge risk-{{ (r.risk_level or '')|lower }}">{{ r.risk_level or '—' }}</span></td>
+        <td>{{ '🚨' if r.is_emergency else '—' }}</td>
+        <td><a href="{{ url_for('history_detail', record_id=r.id) }}">View report</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p>No checks yet. <a href="{{ url_for('index') }}">Run your first symptom check</a>.</p>
+{% endif %}
+{% endblock %}

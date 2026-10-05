@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Health Tips — MediSense AI{% endblock %}
+
+{% block content %}
+<h1>🌦️ Seasonal Health Awareness</h1>
+<p class="subtitle">Common conditions to watch for across the year, with simple prevention tips.</p>
+
+{% for s in seasons %}
+<div class="card season-card">
+  <h2>{{ s.season }}</h2>
+  <p class="label">Watch for</p>
+  <div class="chip-row">
+    {% for d in s.watch_for %}
+    <span class="static-chip">{{ d }}</span>
+    {% endfor %}
+  </div>
+  <p class="label" style="margin-top:14px;">Prevention tips</p>
+  <ul>
+    {% for tip in s.tips %}
+    <li>{{ tip }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+
+<div class="disclaimer-box">
+  This page provides general awareness information only and is not a substitute for public health guidance or medical advice.
+</div>
+{% endblock %}

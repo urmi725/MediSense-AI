@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — MediSense AI{% endblock %}
+
+{% block content %}
+<h1>📊 Analytics Dashboard</h1>
+<p class="subtitle">Model performance and your personal symptom-check insights.</p>
+
+{% if metrics %}
+<div class="card">
+  <h2>Model performance</h2>
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="stat-value">{{ (metrics.cv_mean_accuracy * 100) | round(1) }}%</div>
+      <div class="stat-label">Cross-validated accuracy</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">{{ metrics.n_diseases }}</div>
+      <div class="stat-label">Diseases covered</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">{{ metrics.n_symptoms }}</div>
+      <div class="stat-label">Symptoms tracked</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">{{ metrics.n_training_rows }}</div>
+      <div class="stat-label">Training records</div>
+    </div>
+  </div>
+  <p class="muted small">RandomForestClassifier, {{ metrics.n_estimators }} trees, 5-fold stratified cross-validation (±{{ (metrics.cv_std * 100) | round(2) }}%).</p>
+</div>
+
+<div class="card">
+  <h2>Top symptoms driving predictions</h2>
+  <canvas id="featureChart" height="220"></canvas>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>Your check history at a glance</h2>
+  <div class="stat-grid" id="usage-stats">
+    <div class="stat-box"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total checks</div></div>
+    <div class="stat-box"><div class="stat-value" id="stat-emergency">—</div><div class="stat-label">Emergency flags</div></div>
+    <div class="stat-box"><div class="stat-value" id="stat-helpful">—</div><div class="stat-label">Found helpful</div></div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <h2>Most predicted conditions</h2>
+    <canvas id="diseaseChart" height="240"></canvas>
+  </div>
+  <div class="card">
+    <h2>Risk level distribution</h2>
+    <canvas id="riskChart" height="240"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Most reported symptoms</h2>
+  <canvas id="symptomChart" height="220"></canvas>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>
+{% if metrics %}
+const featureData = {{ metrics.top_features | tojson }};
+new Chart(document.getElementById('featureChart'), {
+  type: 'bar',
+  data: {
+    labels: featureData.map(f => f.symptom.replace(/_/g, ' ')),
+    datasets: [{ label: 'Feature importance', data: featureData.map(f => f.importance), backgroundColor: '#0f766e' }]
+  },
+  options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+});
+{% endif %}
+
+fetch("{{ url_for('api_dashboard_data') }}")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('stat-total').textContent = data.total_checks;
+    document.getElementById('stat-emergency').textContent = data.emergency_count;
+    document.getElementById('stat-helpful').textContent = data.feedback.helpful_pct !== null ? data.feedback.helpful_pct + '%' : '—';
+
+    new Chart(document.getElementById('diseaseChart'), {
+      type: 'bar',
+      data: {
+        labels: data.disease_counts.map(d => d.label),
+        datasets: [{ label: 'Checks', data: data.disease_counts.map(d => d.count), backgroundColor: '#14b8a6' }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+    });
+
+    const riskLabels = Object.keys(data.risk_counts);
+    new Chart(document.getElementById('riskChart'), {
+      type: 'doughnut',
+      data: {
+        labels: riskLabels,
+        datasets: [{
+          data: riskLabels.map(l => data.risk_counts[l]),
+          backgroundColor: riskLabels.map(l => l === 'High' ? '#dc2626' : l === 'Medium' ? '#d97706' : '#16a34a')
+        }]
+      }
+    });
+
+    new Chart(document.getElementById('symptomChart'), {
+      type: 'bar',
+      data: {
+        labels: data.top_symptoms.map(s => s.label),
+        datasets: [{ label: 'Times reported', data: data.top_symptoms.map(s => s.count), backgroundColor: '#0f766e' }]
+      },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0 } } } }
+    });
+  })
+  .catch(err => console.error('Dashboard data failed to load', err));
+</script>
+{% endblock %}

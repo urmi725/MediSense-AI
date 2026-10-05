@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Login — MediSense AI{% endblock %}
+
+{% block content %}
+<div class="auth-wrap">
+  <div class="card auth-card">
+    <h1>Welcome back</h1>
+    <p class="subtitle">Log in to save and view your personal check history and dashboard.</p>
+    <form method="POST" action="{{ url_for('login') }}">
+      <label>Username
+        <input type="text" name="username" required autofocus>
+      </label>
+      <label>Password
+        <input type="password" name="password" required>
+      </label>
+      <button type="submit" class="btn-primary full-width">Log in</button>
+    </form>
+    <p class="auth-switch">Don't have an account? <a href="{{ url_for('register') }}">Sign up</a></p>
+    <p class="auth-switch"><a href="{{ url_for('index') }}">Continue as guest →</a></p>
+  </div>
+</div>
+{% endblock %}

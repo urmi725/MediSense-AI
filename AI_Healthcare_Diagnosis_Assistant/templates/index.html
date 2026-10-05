@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Symptom Check — MediSense AI{% endblock %}
+
+{% block content %}
+<div class="hero">
+  <h1>Know what your symptoms might mean.</h1>
+  <p class="subtitle">Enter your details, select every symptom you're experiencing, and get an instant AI-powered report — likely conditions, risk level, precautions, and the right specialist to see.</p>
+  <div class="hero-stats">
+    <span>🧠 73 conditions modeled</span>
+    <span>🚦 Instant risk scoring</span>
+    <span>🚨 Emergency detection</span>
+  </div>
+  <p class="hero-note">Covers ~73 common conditions — not exhaustive. If your symptoms are severe, unusual, or don't match well, please see a doctor regardless of the result.</p>
+</div>
+
+<form action="{{ url_for('predict_route') }}" method="POST" class="card form-card">
+
+  <fieldset>
+    <legend>Basic details</legend>
+    <div class="grid-3">
+      <label>Age
+        <input type="number" name="age" min="0" max="120" required>
+      </label>
+      <label>Gender
+        <select name="gender">
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <label>Duration of symptoms (days)
+        <input type="number" name="duration_days" min="0" max="365">
+      </label>
+      <label>Weight (kg)
+        <input type="number" step="0.1" name="weight_kg">
+      </label>
+      <label>Height (cm)
+        <input type="number" step="0.1" name="height_cm">
+      </label>
+      <label>Temperature (°C) <span class="tag">Optional</span>
+        <input type="number" step="0.1" name="temperature_c" id="temperature-input" placeholder="e.g. 37.5">
+      </label>
+    </div>
+    <div class="quick-temp-row">
+      <span class="muted small">No thermometer? Just pick one:</span>
+      <button type="button" class="quick-temp-btn" data-symptom="" data-label="No fever">No fever</button>
+      <button type="button" class="quick-temp-btn" data-symptom="mild_fever" data-label="Feels warm / mild fever">Feels warm</button>
+      <button type="button" class="quick-temp-btn" data-symptom="high_fever" data-label="Feels very hot / high fever">Feels very hot</button>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Existing conditions (if any)</legend>
+    <div class="chip-row">
+      {% for cond in ["Diabetes", "Hypertension", "Asthma", "Heart Disease", "Pregnancy", "Immunocompromised"] %}
+      <label class="checkbox-chip">
+        <input type="checkbox" name="existing_conditions" value="{{ cond }}">
+        <span>{{ cond }}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Symptoms <span id="symptom-counter" class="counter">0 selected</span></legend>
+    <div class="search-row">
+      <input type="text" id="symptom-search" placeholder="Search symptoms…" autocomplete="off">
+      <button type="button" id="voice-search-btn" class="voice-btn" title="Search by voice">🎤</button>
+    </div>
+    <p class="muted small">🎤 Voice search works best with simple English words (e.g. "fever", "cough", "headache") — say one symptom at a time.</p>
+    <p id="no-symptom-match" class="disclaimer-box" style="display:none;">
+      No matching symptoms found for that search. Try a simpler word, or scroll down to select from the full list manually.
+    </p>
+    <div class="chip-row" id="symptom-list">
+      {% for key, display_name, severity in symptoms %}
+      <label class="checkbox-chip symptom-chip" data-name="{{ display_name|lower }}">
+        <input type="checkbox" name="symptoms" value="{{ key }}" class="symptom-checkbox">
+        <span>{{ display_name }}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <button type="submit" class="btn-primary">Get my results</button>
+</form>
+{% endblock %}

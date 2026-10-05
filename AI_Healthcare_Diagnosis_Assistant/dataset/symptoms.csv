@@ -1,0 +1,141 @@
+symptom,display_name,severity_weight
+abdominal_cramps,Abdominal cramps,1
+abdominal_pain,Abdominal pain,2
+abdominal_swelling,Abdominal swelling,2
+acid_regurgitation,Acid regurgitation,1
+acne,Acne,1
+anal_itching,Anal itching,1
+anal_pain,Anal pain,1
+back_pain,Back pain,1
+balance_problems,Balance problems,2
+bloating,Bloating,1
+blood_in_sputum,Blood in sputum/cough,3
+blood_in_urine,Blood in urine,3
+blurred_vision,Blurred vision,2
+body_ache,Body ache,1
+bone_pain,Bone pain,1
+burning_stomach_pain,Burning stomach pain,2
+burning_urination,Burning urination,1
+chest_burning,Burning sensation in chest,2
+chest_pain,Chest pain,3
+chest_tightness,Chest tightness,2
+chills,Chills,1
+cold_intolerance,Increased sensitivity to cold,1
+confusion,Sudden confusion,3
+congestion,Nasal congestion,1
+constipation,Constipation,1
+cough,Cough,1
+dark_urine,Dark-colored urine,2
+diarrhea,Diarrhea,2
+difficulty_closing_eye,Difficulty closing one eye,2
+difficulty_seeing_night,Difficulty seeing at night,1
+difficulty_swallowing,Difficulty swallowing,2
+difficulty_urinating,Difficulty urinating,2
+dizziness,Dizziness,2
+dry_skin,Dry skin,1
+ear_discharge,Ear discharge,2
+ear_pain,Ear pain,1
+easy_bruising,Easy or unusual bruising,2
+easy_fractures,Bones that fracture easily,2
+excessive_hair_growth,Excessive facial/body hair growth,1
+excessive_thirst,Excessive thirst,1
+eye_discharge,Eye discharge,1
+eye_pain,Eye pain,2
+eyelid_swelling,Eyelid swelling,1
+facial_drooping,Drooping on one side of the face,3
+facial_pain,Facial pain / pressure,1
+facial_weakness,Facial weakness,2
+faded_colors,Colors appear faded,1
+fatigue,Fatigue,1
+frequent_urination,Frequent urination,1
+groin_lump,Lump in the groin,2
+groin_pain,Groin pain,1
+hair_loss,Hair loss,1
+halos_around_lights,Halos around lights,2
+headache,Headache,1
+hearing_loss,Reduced hearing,2
+heartburn,Heartburn,1
+heat_intolerance,Increased sensitivity to heat,1
+height_loss,Noticeable height loss,1
+high_fever,High fever,2
+hoarse_voice,Hoarse or lost voice,1
+intense_itching_at_night,"Intense itching, worse at night",2
+irregular_periods,Irregular menstrual periods,1
+itching,Itching,1
+itchy_eyes,Itchy eyes,1
+itchy_skin_patches,Itchy skin patches,1
+jaundice,Yellowing of skin/eyes (jaundice),3
+joint_pain,Joint pain,1
+joint_stiffness,Joint stiffness,1
+joint_swelling,Joint swelling,1
+leg_cramps,Leg cramps,1
+leg_pain,Leg pain,2
+leg_pain_radiating,Leg pain radiating from back,2
+leg_swelling,One-sided leg swelling,2
+loss_of_appetite,Loss of appetite,1
+loss_of_consciousness,Loss of consciousness,3
+loss_of_smell,Loss of smell,1
+loss_of_taste,Loss of taste,1
+lower_back_pain,Lower back pain,1
+lower_right_abdominal_pain,Lower right abdominal pain,3
+memory_problems,Memory problems / brain fog,1
+mild_fever,Mild fever,1
+morning_stiffness,Morning stiffness,1
+mouth_white_spots,White spots inside mouth,2
+muscle_spasms,Muscle spasms,2
+muscle_stiffness,Muscle stiffness (incl. jaw),3
+muscle_weakness,Muscle weakness,1
+nausea,Nausea,1
+night_sweats,Night sweats,2
+nighttime_urination,Frequent nighttime urination,1
+nosebleed,Nosebleed,1
+numbness_tingling,Numbness or tingling,2
+pale_skin,Pale skin,1
+palpitations,Heart palpitations,2
+pelvic_pain,Pelvic pain,2
+persistent_cough,Persistent cough (2+ weeks),2
+rapid_breathing,Rapid breathing,3
+rapid_heartbeat,Rapid heartbeat,2
+rectal_bleeding,Rectal bleeding,2
+red_eyes,Red/bloodshot eyes,1
+redness,Skin redness,1
+reduced_mobility,Reduced joint mobility,1
+ring_shaped_rash,Ring-shaped rash,1
+runny_nose,Runny nose,1
+seizures,Seizures / convulsions,3
+sensitivity_to_light,Sensitivity to light,1
+severe_back_pain,Severe back/flank pain,2
+severe_coughing_fits,Severe fits of coughing,2
+severe_dehydration,Severe dehydration,3
+severe_joint_pain,Severe joint pain,2
+severe_menstrual_pain,Severe menstrual pain,2
+shortness_of_breath,Shortness of breath,3
+shoulder_pain,Shoulder pain,1
+silvery_scales,Silvery scaly skin patches,1
+skin_cracking,Cracked skin,1
+skin_rash,Skin rash,1
+skin_white_patches,White patches on skin,1
+slow_healing,Slow-healing wounds,1
+sneezing,Sneezing,1
+sore_throat,Sore throat,1
+spinning_sensation,Spinning sensation (vertigo),2
+sudden_joint_pain,Sudden intense joint pain,2
+sweating,Excessive sweating,1
+swelling_legs,Swelling in legs/ankles,2
+swollen_jaw_glands,Swollen glands near jaw/neck,2
+swollen_lymph_nodes,Swollen lymph nodes,1
+swollen_tonsils,Swollen tonsils,1
+symmetric_joint_pain,Pain in joints on both sides,1
+thick_nasal_discharge,Thick nasal discharge,1
+throat_irritation,Throat irritation,1
+tremors,Hand tremors,2
+unexplained_weight_loss,Unexplained weight loss,2
+upper_abdominal_pain,Upper right abdominal pain,2
+vomiting,Vomiting,2
+warmth_in_leg,Warmth in the leg,2
+watery_diarrhea,Watery diarrhea,2
+watery_eyes,Watery eyes,1
+weak_urine_stream,Weak urine stream,1
+weight_gain,Unexplained weight gain,1
+weight_loss,Unexplained weight loss,2
+wheezing,Wheezing,2

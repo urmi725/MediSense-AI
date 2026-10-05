@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% block title %}Find a Doctor — MediSense AI{% endblock %}
+
+{% block content %}
+<h1>👨‍⚕️ Find a Specialist</h1>
+<p class="subtitle">
+  {% if specialist_query %}Looking for a <strong>{{ specialist_query }}</strong> near you.{% else %}Search live for doctors and hospitals near you, or browse the curated Agra &amp; Mathura list below.{% endif %}
+</p>
+
+<div class="card">
+  <button id="locate-doctor-btn" class="btn-primary">📍 Find {{ specialist_query or 'a specialist' }} near my live location</button>
+  <span id="locate-doctor-status" class="muted small" style="margin-left:10px;"></span>
+  <p class="muted small" style="margin-top:10px;">Uses your device's GPS to find the closest matching doctors/clinics — your location isn't stored.</p>
+</div>
+
+<div class="card" id="doctor-map-card" style="display:none;">
+  <div id="doctor-map" style="height:360px; border-radius:10px;"></div>
+</div>
+
+<div class="card" id="doctor-results-card" style="display:none;">
+  <h2>Nearby results</h2>
+  <table class="history-table">
+    <thead><tr><th>Name</th><th>Address</th><th>Distance</th><th></th></tr></thead>
+    <tbody id="doctor-results-body"></tbody>
+  </table>
+</div>
+
+<div class="disclaimer-box" id="doctor-fallback-box" style="display:none;">
+  Couldn't get your location or find live results near you. You can try the text search below, or browse the curated list.
+</div>
+
+<form method="GET" action="{{ url_for('find_doctor') }}" class="card">
+  <div class="search-row" style="align-items:flex-end; flex-wrap:wrap;">
+    <label style="flex:2; min-width:180px;">Specialty
+      <input type="text" name="specialist" placeholder="e.g. Cardiologist, ENT, Gynecologist…" value="{{ specialist_query }}">
+    </label>
+    <label style="flex:1; min-width:140px;">City / Area
+      <input type="text" name="city" placeholder="e.g. Agra, Mathura, Vrindavan…" value="{{ city }}">
+    </label>
+    <input type="hidden" name="searched" value="1">
+    <button type="submit" class="btn-secondary" style="height:40px;">🔍 Search by city name instead</button>
+  </div>
+  {% if live_enabled %}
+    <p class="muted small" style="margin-top:8px;">🔴 Live search is enabled — results come from Google in real time.</p>
+  {% else %}
+    <p class="muted small" style="margin-top:8px;">Live search isn't configured with a Google key yet — city search will show curated listings. See README to enable it.</p>
+  {% endif %}
+</form>
+
+{% if searched %}
+  {% if live_error %}
+    <div class="disclaimer-box">{{ live_error }}</div>
+  {% endif %}
+
+  {% if live_results %}
+  <div class="card table-card">
+    <h2>Live results for "{{ specialist_query or 'hospitals' }}" near {{ city }}</h2>
+    <table class="history-table">
+      <thead><tr><th>Name</th><th>Address</th><th>Rating</th><th></th></tr></thead>
+      <tbody>
+        {% for r in live_results %}
+        <tr>
+          <td>{{ r.name }}</td>
+          <td class="small muted">{{ r.address }}</td>
+          <td>{{ r.rating and (r.rating ~ ' ⭐ (' ~ (r.user_ratings_total or 0) ~ ')') or '—' }}</td>
+          <td>{% if r.maps_url %}<a href="{{ r.maps_url }}" target="_blank" rel="noopener">View on Maps →</a>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+{% endif %}
+
+{% if not live_results %}
+<h2>Curated: Agra &amp; Mathura</h2>
+<div class="disclaimer-box">
+  These curated listings are sourced from public Google Maps information (name, address, phone, rating) and are provided for convenience only.
+  Details like doctor availability, fees, and hours can change — please <strong>call ahead to confirm</strong> before visiting. This is not an endorsement or a guarantee of care quality.
+</div>
+
+{% for c_city in ["Agra", "Mathura"] %}
+{% set city_clinics = clinics | selectattr("city", "equalto", c_city) | list %}
+{% if city_clinics %}
+<h3>{{ c_city }}</h3>
+<div class="card table-card">
+  <table class="history-table">
+    <thead>
+      <tr><th>Name</th><th>Specialty</th><th>Address</th><th>Contact</th><th>Rating</th></tr>
+    </thead>
+    <tbody>
+      {% for c in city_clinics %}
+      <tr class="{{ 'highlight-row' if specialist_query and specialist_query.lower() in c.specialists.lower() else '' }}">
+        <td>{{ c.name }}</td>
+        <td>{{ c.specialists }}</td>
+        <td class="small muted">{{ c.address }}</td>
+        <td>{{ c.phone }}</td>
+        <td>{{ c.rating }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const specialty = {{ (specialist_query or "") | tojson }};
+const locateBtn = document.getElementById('locate-doctor-btn');
+const locateStatus = document.getElementById('locate-doctor-status');
+const mapCard = document.getElementById('doctor-map-card');
+const resultsCard = document.getElementById('doctor-results-card');
+const resultsBody = document.getElementById('doctor-results-body');
+const fallbackBox = document.getElementById('doctor-fallback-box');
+
+let doctorMap;
+
+function initDoctorMap(lat, lng) {
+  doctorMap = L.map('doctor-map').setView([lat, lng], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 19,
+  }).addTo(doctorMap);
+  L.marker([lat, lng]).addTo(doctorMap).bindPopup('📍 Your location').openPopup();
+}
+
+function renderDoctorResults(items) {
+  resultsBody.innerHTML = '';
+  items.forEach(item => {
+    L.marker([item.lat, item.lng]).addTo(doctorMap)
+      .bindPopup(`<strong>${item.name}</strong><br>${item.address || ''}<br>${item.distance_km} km away`);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td class="small muted">${item.address || '—'}</td>
+      <td>${item.distance_km} km</td>
+      <td><a href="${item.directions_url}" target="_blank" rel="noopener">Directions →</a></td>
+    `;
+    resultsBody.appendChild(row);
+  });
+  resultsCard.style.display = items.length ? 'block' : 'none';
+  if (!items.length) fallbackBox.style.display = 'block';
+}
+
+function locateAndSearch() {
+  if (!navigator.geolocation) {
+    locateStatus.textContent = 'Your browser does not support geolocation.';
+    fallbackBox.style.display = 'block';
+    return;
+  }
+  locateStatus.textContent = 'Requesting your location…';
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      locateStatus.textContent = 'Location found — searching…';
+      mapCard.style.display = 'block';
+      initDoctorMap(lat, lng);
+
+      fetch(`/api/nearby-specialists?lat=${lat}&lng=${lng}&specialty=${encodeURIComponent(specialty)}`)
+        .then(r => r.json())
+        .then(data => {
+          console.log('nearby-specialists response:', data);
+          locateStatus.textContent = `Found ${data.count} nearby result(s) (source: ${data.source}).`;
+          renderDoctorResults(data.specialists || []);
+        })
+        .catch((err) => {
+          console.error('nearby-specialists fetch failed:', err);
+          locateStatus.textContent = 'Could not fetch nearby results — check the browser console (F12) for details.';
+          fallbackBox.style.display = 'block';
+        });
+    },
+    () => {
+      locateStatus.textContent = 'Location access was denied or unavailable.';
+      fallbackBox.style.display = 'block';
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+locateBtn.addEventListener('click', locateAndSearch);
+
+{% if auto_locate %}
+// Came here from a report's "find one near me now" link — search immediately.
+locateAndSearch();
+{% endif %}
+</script>
+{% endblock %}

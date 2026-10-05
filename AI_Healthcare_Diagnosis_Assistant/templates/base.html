@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}MediSense AI — Healthcare Diagnosis Assistant{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-icon">🩺</span> MediSense <span class="brand-accent">AI</span>
+      </a>
+      <nav class="nav-links">
+        <a href="{{ url_for('index') }}">Symptom Check</a>
+        <a href="{{ url_for('history') }}">History</a>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('health_tips') }}">Health Tips</a>
+        <a href="{{ url_for('find_doctor') }}">Find a Doctor</a>
+        <a href="{{ url_for('emergency_hospitals') }}" class="nav-emergency">🚑 Emergency</a>
+        {% if logged_in_user %}
+          <span class="nav-user">👤 {{ logged_in_user.full_name or logged_in_user.username }}</span>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('register') }}" class="nav-cta">Sign up</a>
+        {% endif %}
+        <button id="theme-toggle" class="theme-toggle" type="button" title="Toggle dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="disclaimer-bar">
+    ⚠️ Educational project only — not a medical device. It does not replace professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider.
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for message in messages %}
+          <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    MediSense AI — Built as an educational demo of an end-to-end ML + web diagnosis pipeline. Not for clinical use.
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
